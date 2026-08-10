@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COY</title>
+<meta name="description" content="An atmospheric landing page for COY, a secretive society, presenting cryptic text and a hidden glyph.">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='7' fill='%230a0a0c'/><circle cx='8' cy='8' r='2' fill='%23b8a878'/></svg>">
+<style>
+  :root {
+    --font-serif: Georgia, 'Times New Roman', Times, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --ink: #0a0a0c;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--ink);
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  #coy-root {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--ink);
+    overflow: hidden;
+    font-family: var(--font-serif);
+    color: #c9c4b8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem 5rem;
+    text-align: center;
+    cursor: default;
+  }
+
+  #coy-sigil {
+    margin-bottom: 2.5rem;
+    opacity: 0.85;
+    will-change: transform;
+  }
+
+  #coy-rotor { transform-origin: 80px 80px; }
+
+  .coy-word {
+    letter-spacing: 0.9em;
+    font-size: 30px;
+    color: #d8d2c4;
+    margin: 0 0 1.4rem;
+    padding-left: 0.9em;
+    font-weight: 400;
+  }
+
+  .coy-line {
+    font-size: 15px;
+    line-height: 2;
+    max-width: 380px;
+    margin: 0 0 0.4rem;
+    color: #9a9484;
+    font-style: italic;
+  }
+
+  .coy-line + .coy-line {
+    color: #807a6c;
+    font-style: normal;
+    margin-bottom: 2.4rem;
+  }
+
+  .coy-rule {
+    width: 40px;
+    height: 1px;
+    background: #3a372f;
+    margin-bottom: 2.4rem;
+  }
+
+  #coy-cipher {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    color: #5a5648;
+    margin: 0 0 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    transition: color 0.6s;
+  }
+
+  #coy-cipher:focus-visible { outline: 1px dotted #5a5648; outline-offset: 6px; }
+
+  #coy-reveal {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: #2a2a2a;
+    margin: 0;
+    height: 14px;
+    transition: color 1.2s;
+  }
+
+  .coy-foot {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: #38352d;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #coy-sigil { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<h1 class="sr-only">COY — an atmospheric landing page for a secretive society, presenting cryptic text and a hidden glyph.</h1>
+
+<div id="coy-root">
+
+  <svg id="coy-sigil" width="160" height="160" viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+    <circle cx="80" cy="80" r="62" fill="none" stroke="#3a372f" stroke-width="0.5"/>
+    <circle cx="80" cy="80" r="52" fill="none" stroke="#4a4639" stroke-width="0.5"/>
+    <g id="coy-rotor">
+      <polygon points="80,28 110,132 80,108 50,132" fill="none" stroke="#8a8266" stroke-width="0.5"/>
+      <polygon points="80,28 50,132 80,108 110,132" fill="none" stroke="#6a6553" stroke-width="0.5"/>
+      <line x1="80" y1="18" x2="80" y2="142" stroke="#5a5648" stroke-width="0.5"/>
+      <line x1="18" y1="80" x2="142" y2="80" stroke="#3a372f" stroke-width="0.5"/>
+    </g>
+    <circle id="coy-eye" cx="80" cy="80" r="6" fill="#b8a878" opacity="0.7"/>
+    <circle cx="80" cy="80" r="13" fill="none" stroke="#8a8266" stroke-width="0.5"/>
+  </svg>
+
+  <div class="coy-word">COY</div>
+
+  <p class="coy-line">We are not recruiting.</p>
+  <p class="coy-line">Those who are meant to find us, already have.</p>
+
+  <div class="coy-rule"></div>
+
+  <button type="button" id="coy-cipher" aria-expanded="false" aria-controls="coy-reveal">⠺⠓⠕ ⠅⠝⠕⠉⠅⠎</button>
+  <p id="coy-reveal" aria-live="polite"></p>
+
+  <div class="coy-foot">
+    <span>est. ⅯⅯ</span>
+    <span id="coy-time"></span>
+    <span>coy.dk</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root   = document.getElementById('coy-root');
+  var sigil  = document.getElementById('coy-sigil');
+  var rotor  = document.getElementById('coy-rotor');
+  var eye    = document.getElementById('coy-eye');
+  var still  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // The compass is bound to wall-clock time, not to page load: one full
+  // revolution per minute, phase taken from a fixed epoch. Reloading — or
+  // opening the page on another machine — lands on the same bearing.
+  var EPOCH = Date.UTC(2000, 0, 1);        // est. ⅯⅯ
+  var TURN_MS = 60000;                     // 6°/s
+  var PULSE_MS = 20944;                    // eye breath, ~21s
+
+  function render(){
+    var since = Date.now() - EPOCH;
+    var bearing = (since % TURN_MS) / TURN_MS * 360;
+    var phase = (since % PULSE_MS) / PULSE_MS * Math.PI * 2;
+    rotor.style.transform = 'rotate(' + bearing.toFixed(2) + 'deg)';
+    eye.setAttribute('opacity', (0.45 + 0.35*Math.abs(Math.sin(phase))).toFixed(2));
+  }
+
+  function tick(){
+    render();
+    requestAnimationFrame(tick);
+  }
+
+  render();
+  if(!still) tick();
+
+  var time = document.getElementById('coy-time');
+  function clock(){
+    var d = new Date();
+    var h = String(d.getUTCHours()).padStart(2,'0');
+    var m = String(d.getUTCMinutes()).padStart(2,'0');
+    time.textContent = h + '·' + m + ' utc';
+  }
+  clock(); setInterval(clock, 10000);
+
+  var cipher = document.getElementById('coy-cipher');
+  var reveal = document.getElementById('coy-reveal');
+  var open = false;
+  cipher.addEventListener('click', function(){
+    open = !open;
+    cipher.setAttribute('aria-expanded', String(open));
+    if(open){
+      cipher.style.color = '#8a8266';
+      reveal.style.color = '#6a6553';
+      reveal.textContent = 'the door is where you stop looking';
+    } else {
+      cipher.style.color = '#5a5648';
+      reveal.style.color = '#2a2a2a';
+      reveal.textContent = '';
+    }
+  });
+
+  if(!still && window.matchMedia('(hover: hover)').matches){
+    root.addEventListener('mousemove', function(e){
+      var r = root.getBoundingClientRect();
+      var dx = (e.clientX - r.left - r.width/2) / r.width;
+      var dy = (e.clientY - r.top - r.height/2) / r.height;
+      sigil.style.transform = 'translate(' + (dx*8).toFixed(1) + 'px,' + (dy*8).toFixed(1) + 'px)';
+    });
+  }
+})();
+</script>
+</body>
+</html>
